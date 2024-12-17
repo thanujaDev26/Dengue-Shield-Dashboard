@@ -1,0 +1,10 @@
+.sidebar {
+    /*border: 2px solid black;*/
+    border-radius: 0 5vh 5vh 0;
+    background-color: #e8e0e0;
+}
+
+.sidebar-button {
+    border-radius:5vh;
+    background-color: #e8e0e0;
+}
