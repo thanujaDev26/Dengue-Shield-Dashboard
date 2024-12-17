@@ -4,7 +4,19 @@
     background-color: #e8e0e0;
 }
 
-.sidebar-button {
-    border-radius:5vh;
-    background-color: #e8e0e0;
+/*.sidebar-button {*/
+/*    border-radius:5vh;*/
+/*}*/
+.sidebar-button :hover {
+    background-color: black;
+    color: white;
+    transition-duration: 0.1s;
+}
+
+
+.not-expanded-sidebar-button :hover{
+    background-color: black;
+    color: white;
+    transition-duration: 0.1s;
+    border-radius: 50%;
 }
