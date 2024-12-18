@@ -20,7 +20,7 @@ export default function Stats() {
                             className="relative flex flex-col items-center rounded-3xl bg-gradient-to-r from-white to-gray-100 shadow-xl p-8 sm:p-10 hover:shadow-2xl transition-shadow duration-300"
                         >
                             <dd className="text-5xl font-extrabold text-red-500 sm:text-6xl">
-                                <CountUp end={stat.value} duration={2} separator="," />
+                                <CountUp end={stat.value} duration={5} separator="," />
                             </dd>
                             <dt className="mt-4 text-xl font-medium text-gray-700 tracking-wide uppercase">
                                 {stat.name}

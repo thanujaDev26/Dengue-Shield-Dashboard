@@ -1,12 +1,11 @@
 import { useState } from "react";
-import { FaCloudRain } from "react-icons/fa";  // Importing a rain icon for luxury feel
+import { FaCloudRain } from "react-icons/fa";
 
 export default function Weather() {
     const [city, setCity] = useState('');
     const [weatherInfo, setWeatherInfo] = useState(null);
 
     const handleCitySearch = () => {
-        // For now, we simulate rainfall as the condition.
         setWeatherInfo({
             city,
             temperature: '27°C',

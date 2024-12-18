@@ -5,21 +5,30 @@ import Weather from './Weather.jsx';
 export default function Map() {
     const [selectedMarker, setSelectedMarker] = useState(null);
 
-    // Markers for Matara and Maharagama
+
     const markers = [
         { position: { lat: 5.9485, lng: 80.5353 }, name: 'Matara' },
         { position: { lat: 6.8466, lng: 79.9287 }, name: 'Maharagama' },
+        { position: { lat: 9.6615, lng: 80.2230 }, name: 'Jaffna' },
     ];
 
-    // Map container style with fixed height
+
     const containerStyle = {
         width: '100%',
-        height: '500px', // Increased height for better map visibility
+        height: '500px',
     };
 
-    // Default center of the map (Sri Lanka)
-    const defaultCenter = { lat: 7.8731, lng: 80.7718 };
-    const zoomLevel = 8;  // Zoom level for the whole of Sri Lanka
+
+    const defaultCenter = { lat: 6.5, lng: 80.7718 };
+    const zoomLevel = 6;
+
+
+    const bounds = {
+        north: 10.8368,
+        south: 4.0123,
+        east: 81.8803,
+        west: 79.4225,
+    };
 
     return (
         <div className="bg-white py-24 sm:py-32">
@@ -34,21 +43,27 @@ export default function Map() {
                                 mapContainerStyle={containerStyle}
                                 center={defaultCenter}
                                 zoom={zoomLevel}
+                                options={{
+                                    restriction: {
+                                        latLngBounds: bounds,
+                                        strictBounds: true, 
+                                    },
+                                }}
                             >
-                                {/* Markers for Matara and Maharagama */}
+
                                 {markers.map((marker, index) => (
                                     <Marker
                                         key={index}
                                         position={marker.position}
-                                        onClick={() => setSelectedMarker(marker)}  // Set selected marker on click
+                                        onClick={() => setSelectedMarker(marker)}
                                     />
                                 ))}
 
-                                {/* InfoWindow to show the name of the town */}
+
                                 {selectedMarker && (
                                     <InfoWindow
                                         position={selectedMarker.position}
-                                        onCloseClick={() => setSelectedMarker(null)}  // Close the InfoWindow when clicked
+                                        onCloseClick={() => setSelectedMarker(null)}
                                     >
                                         <div>
                                             <h4 className="text-lg font-bold text-gray-900">{selectedMarker.name}</h4>
@@ -60,7 +75,7 @@ export default function Map() {
                         </LoadScript>
                     </div>
 
-                    {/* Weather Component */}
+
                     <div className="w-full lg:w-1/2 pl-8">
                         <Weather />
                     </div>
