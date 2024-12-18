@@ -1,92 +1,94 @@
+import PropTypes from 'prop-types';
+import { useState, useContext, createContext } from 'react';
 import {
     HomeIcon,
     BuildingOfficeIcon,
     ChartBarIcon,
     ArrowLeftOnRectangleIcon,
-    Bars3Icon,
     CloudIcon,
-    XMarkIcon,
     UserCircleIcon,
-    CogIcon
-} from "@heroicons/react/24/solid";
-import { useState } from "react";
+    CogIcon,
+    Bars3Icon,
+    XMarkIcon
+} from '@heroicons/react/24/solid';
+import { Link } from 'react-router-dom';
+import Profile from "../UserProfile/Profile.jsx";
 import './navigations.css'
-import { Link } from "react-router-dom";
 
-const Navbar = () => {
-    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+const SidebarContext = createContext();
+
+export default function Sidebar() {
+    const [expanded, setExpanded] = useState(true);
 
     return (
-        <div className="flex h-screen">
-            {/* Sidebar */}
-            <div
-                className={`text-black h-screen ${isSidebarOpen ? "w-64" : "w-16"} duration-1000 flex flex-col sidebar`}
-            >
+        <aside className="h-screen">
+            <nav className="h-full flex flex-col bg-white border-r shadow-sm px-4 py-3 sidebar">
                 {/* Sidebar Header */}
                 <div className="flex items-center justify-between px-4 py-7">
-                    {isSidebarOpen && <h1 className="text-lg font-bold">Menu</h1>}
+                    {expanded && <h1 className="text-lg font-bold">Menu</h1>}
                     <button
-                        onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-                        className="text-black"
+                        onClick={() => setExpanded((current) => !current)}
+                        className="text-black flex items-center justify-center"
                     >
-                        {isSidebarOpen ? (
-                            <XMarkIcon className="w-6 h-6" />
+                        {expanded ? (
+                            <XMarkIcon className="w-6 h-6 text-black" />
                         ) : (
-                            <Bars3Icon className="w-6 h-6" />
+                            <Bars3Icon className="w-6 h-6 text-black" />
                         )}
                     </button>
                 </div>
 
-                {/* Sidebar Links */}
-                <nav className="flex-1">
-                    <ul className="space-y-3 sidebar-button">
-                        <li>
-                            <Link to="/dashboard" className="flex items-center px-4 py-7 hover:bg-black hover:text-white rounded-3xl duration-500">
-                                <HomeIcon className="w-6 h-6" />
-                                {isSidebarOpen && <span className="ml-3">Dashboard</span>}
-                            </Link>
-                        </li>
-                        <li>
-                            <Link to="/moh-offices" className="flex items-center px-4 py-7 hover:bg-black hover:text-white rounded-3xl duration-500">
-                                <BuildingOfficeIcon className="w-6 h-6" />
-                                {isSidebarOpen && <span className="ml-3">MOH Offices</span>}
-                            </Link>
-                        </li>
-                        <li>
-                            <Link to="/recent-activities" className="flex items-center px-4 py-7 hover:bg-black hover:text-white rounded-3xl duration-500">
-                                <ChartBarIcon className="w-6 h-6" />
-                                {isSidebarOpen && <span className="ml-3">Recent Activities</span>}
-                            </Link>
-                        </li>
-                        <li>
-                            <Link to="/deployments" className="flex items-center px-4 py-7 hover:bg-black hover:text-white rounded-3xl duration-500">
-                                <CloudIcon className="w-6 h-6" />
-                                {isSidebarOpen && <span className="ml-3">Deployments</span>}
-                            </Link>
-                        </li>
-                        <li>
-                            <Link to="/admins" className="flex items-center px-4 py-7 hover:bg-black hover:text-white rounded-3xl duration-500">
-                                <UserCircleIcon className="w-6 h-6" />
-                                {isSidebarOpen && <span className="ml-3">Admins</span>}
-                            </Link>
-                        </li>
-                        <li>
-                            <Link to="/settings" className="flex items-center px-4 py-7 hover:bg-black hover:text-white rounded-3xl duration-500">
-                                <CogIcon className="w-6 h-6" />
-                                {isSidebarOpen && <span className="ml-3">Settings</span>}
-                            </Link>
-                        </li>
-                        <li>
-                            <Link to="/logout" className="flex items-center px-4 py-7 hover:bg-black hover:text-white rounded-3xl duration-500">
-                                <ArrowLeftOnRectangleIcon className="w-6 h-6" />
-                                {isSidebarOpen && <span className="ml-3">Logout</span>}
-                            </Link>
-                        </li>
+                <SidebarContext.Provider value={{ expanded }}>
+                    <ul className={`flex-1 ${expanded ? '' : ''} sidebar-button space-y-4`}>
+                        {/* Navigation Items */}
+                        <SidebarItem to="/dashboard" icon={<HomeIcon className="w-8 h-8" />} text="Dashboard" />
+                        <SidebarItem to="/moh-offices" icon={<BuildingOfficeIcon className="w-8 h-8" />} text="MOH Offices" />
+                        <SidebarItem to="/recent-activities" icon={<ChartBarIcon className="w-8 h-8" />} text="Recent Activities" />
+                        <SidebarItem to="/deployments" icon={<CloudIcon className="w-8 h-8" />} text="Deployments" />
+                        <SidebarItem to="/admins" icon={<UserCircleIcon className="w-8 h-8" />} text="Admins" />
+                        <SidebarItem to="/settings" icon={<CogIcon className="w-8 h-8" />} text="Settings" />
+                        <SidebarItem to="/logout" icon={<ArrowLeftOnRectangleIcon className="w-8 h-8" />} text="Logout" />
                     </ul>
-                </nav>
-            </div>
-        </div>
+                </SidebarContext.Provider>
+
+                {/* Sidebar Footer (User Info) */}
+                <div>
+                    <Profile expanded={expanded} />
+                </div>
+            </nav>
+        </aside>
     );
+}
+
+
+function SidebarItem({to, icon, text, active}) {
+    const {expanded} = useContext(SidebarContext);
+
+    return (
+        <li
+            className={`relative flex items-center py-3 px-5 my-2 font-medium rounded-md cursor-pointer transition-colors group ${
+                active
+                    ? 'bg-gradient-to-tr from-indigo-200 to-indigo-100 text-indigo-800'
+                    : 'hover:bg-indigo-50 text-gray-600'
+            }`}
+        >
+            <Link to={to} className="flex items-center w-full">
+                <div className="flex items-center justify-center w-12 h-12">{icon}</div>
+                <span className={`overflow-hidden transition-all ${expanded ? 'w-52 ml-3' : 'w-0'}`}>
+                    {text}
+                </span>
+            </Link>
+        </li>
+    );
+}
+
+SidebarItem.propTypes = {
+    to: PropTypes.string.isRequired,
+    icon: PropTypes.element.isRequired,
+    text: PropTypes.string.isRequired,
+    active: PropTypes.bool,
 };
 
-export default Navbar;
+SidebarItem.defaultProps = {
+    active: false,
+};
