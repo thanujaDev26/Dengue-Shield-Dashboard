@@ -20,6 +20,7 @@ function App() {
                 <Sidebar/>
                 <div className="flex-1 bg-gray-100 overflow-y-auto p-6">
                     <Routes>
+                        <Route path="/" element={<Home/>} />
                         <Route path="/dashboard" element={<Home/>} />
                         <Route path="/moh-offices" element={<Office />} />
                         <Route path="/recent-activities" element={<RecentActivities/>} />

@@ -1,8 +1,19 @@
+import Stats from "./Stats.jsx";
+import Chart from "./Chart.jsx";
+import Map from "./Map.jsx";
+import SensorData from "./SensorData.jsx";
+
+
 export default function Home() {
 
     return(
         <div className="Home">
-            <h1> Home </h1>
+            <div>
+                <Stats/>
+                <Chart/>
+                <Map/>
+                <SensorData/>
+            </div>
         </div>
     )
 }
