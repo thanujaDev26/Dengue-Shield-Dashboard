@@ -45,52 +45,52 @@ export default function Sidebar() {
                 </div>
 
                 <SidebarContext.Provider value={{ expanded }}>
-                    <ul className={`flex-1 ${expanded ? '' : ''} sidebar-button space-y-4`}>
+                    <ul className={`flex-1 ${expanded ? '' : ''} sidebar-button space-y-4 md:space-y-0`}>
                         <SidebarItem
                             to="/dashboard"
-                            icon={<HomeIcon className="w-8 h-8" />}
+                            icon={<HomeIcon className="w-8 h-8 md:w-4 md:h-4" />}
                             text="Dashboard"
                             active={activeItem === '/dashboard'}
                             onClick={handleItemClick}
                         />
                         <SidebarItem
                             to="/moh-offices"
-                            icon={<BuildingOfficeIcon className="w-8 h-8" />}
+                            icon={<BuildingOfficeIcon className="w-8 h-8 md:w-4 md:h-4" />}
                             text="MOH Offices"
                             active={activeItem === '/moh-offices'}
                             onClick={handleItemClick}
                         />
                         <SidebarItem
                             to="/recent-activities"
-                            icon={<ChartBarIcon className="w-8 h-8" />}
+                            icon={<ChartBarIcon className="w-8 h-8 md:w-4 md:h-4" />}
                             text="Recent Activities"
                             active={activeItem === '/recent-activities'}
                             onClick={handleItemClick}
                         />
                         <SidebarItem
                             to="/deployments"
-                            icon={<CloudIcon className="w-8 h-8" />}
+                            icon={<CloudIcon className="w-8 h-8 md:w-4 md:h-4" />}
                             text="Deployments"
                             active={activeItem === '/deployments'}
                             onClick={handleItemClick}
                         />
                         <SidebarItem
                             to="/admins"
-                            icon={<UserCircleIcon className="w-8 h-8" />}
+                            icon={<UserCircleIcon className="w-8 h-8 md:w-4 md:h-4" />}
                             text="Admins"
                             active={activeItem === '/admins'}
                             onClick={handleItemClick}
                         />
                         <SidebarItem
                             to="/settings"
-                            icon={<CogIcon className="w-8 h-8" />}
+                            icon={<CogIcon className="w-8 h-8 md:w-4 md:h-4" />}
                             text="Settings"
                             active={activeItem === '/settings'}
                             onClick={handleItemClick}
                         />
                         <SidebarItem
                             to="/logout"
-                            icon={<ArrowLeftOnRectangleIcon className="w-8 h-8" />}
+                            icon={<ArrowLeftOnRectangleIcon className="w-8 h-8 md:w-4 md:h-4" />}
                             text="Logout"
                             active={activeItem === '/logout'}
                             onClick={handleItemClick}
