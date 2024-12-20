@@ -22,9 +22,9 @@ export default function Sidebar() {
 
     return (
         <aside className="h-screen">
-            <nav className="h-full flex flex-col bg-white border-r shadow-sm px-4 py-3 sidebar">
+            <nav className="h-full flex flex-col bg-white border-r shadow-sm px-4 py-0 sidebar">
                 {/* Sidebar Header */}
-                <div className="flex items-center justify-between px-4 py-7">
+                <div className="flex items-center justify-between px-4 py-7 md:py-2">
                     {expanded && <h1 className="text-lg font-bold">Menu</h1>}
                     <button
                         onClick={() => setExpanded((current) => !current)}
@@ -39,15 +39,15 @@ export default function Sidebar() {
                 </div>
 
                 <SidebarContext.Provider value={{ expanded }}>
-                    <ul className={`flex-1 ${expanded ? '' : ''} sidebar-button space-y-4`}>
+                    <ul className={`flex-1 ${expanded ? '' : ''} sidebar-button space-y-4 md:space-y-0`}>
                         {/* Navigation Items */}
-                        <SidebarItem to="/dashboard" icon={<HomeIcon className="w-8 h-8" />} text="Dashboard" />
-                        <SidebarItem to="/moh-offices" icon={<BuildingOfficeIcon className="w-8 h-8" />} text="MOH Offices" />
-                        <SidebarItem to="/recent-activities" icon={<ChartBarIcon className="w-8 h-8" />} text="Recent Activities" />
-                        <SidebarItem to="/deployments" icon={<CloudIcon className="w-8 h-8" />} text="Deployments" />
-                        <SidebarItem to="/admins" icon={<UserCircleIcon className="w-8 h-8" />} text="Admins" />
-                        <SidebarItem to="/settings" icon={<CogIcon className="w-8 h-8" />} text="Settings" />
-                        <SidebarItem to="/logout" icon={<ArrowLeftOnRectangleIcon className="w-8 h-8" />} text="Logout" />
+                        <SidebarItem to="/dashboard" icon={<HomeIcon className="w-8 h-8 md:w-6 md:h-6" />} text="Dashboard" className="sidebar-button-item"/>
+                        <SidebarItem to="/moh-offices" icon={<BuildingOfficeIcon className="w-8 h-8 md:w-6 md:h-6" />} text="MOH Offices" />
+                        <SidebarItem to="/recent-activities" icon={<ChartBarIcon className="w-8 h-8 md:w-6 md:h-6" />} text="Recent Activities" />
+                        <SidebarItem to="/deployments" icon={<CloudIcon className="w-8 h-8 md:w-6 md:h-6" />} text="Deployments" />
+                        <SidebarItem to="/admins" icon={<UserCircleIcon className="w-8 h-8 md:w-6 md:h-6" />} text="Admins" />
+                        <SidebarItem to="/settings" icon={<CogIcon className="w-8 h-8 md:w-6 md:h-6" />} text="Settings" />
+                        <SidebarItem to="/logout" icon={<ArrowLeftOnRectangleIcon className="w-8 h-8 md:w-6 md:h-6" />} text="Logout" />
                     </ul>
                 </SidebarContext.Provider>
 

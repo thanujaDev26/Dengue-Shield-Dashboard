@@ -13,7 +13,7 @@
     transition-duration: 0.1s;
 }
 
-.sidebar-button :active {
+.sidebar-button-item:active {
     background-color: black;
     color: white;
 }
