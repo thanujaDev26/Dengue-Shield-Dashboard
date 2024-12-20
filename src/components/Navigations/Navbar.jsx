@@ -19,12 +19,18 @@ const SidebarContext = createContext();
 
 export default function Sidebar() {
     const [expanded, setExpanded] = useState(false);
+    const [activeItem, setActiveItem] = useState('/dashboard');
+
+    const handleItemClick = (path) => {
+        setActiveItem(path);
+    };
 
     return (
         <aside className="h-screen">
             <nav className="h-full flex flex-col bg-white border-r shadow-sm px-4 py-0 sidebar">
                 {/* Sidebar Header */}
                 <div className="flex items-center justify-between px-4 py-7 md:py-2">
+
                     {expanded && <h1 className="text-lg font-bold">Menu</h1>}
                     <button
                         onClick={() => setExpanded((current) => !current)}
@@ -39,19 +45,58 @@ export default function Sidebar() {
                 </div>
 
                 <SidebarContext.Provider value={{ expanded }}>
-                    <ul className={`flex-1 ${expanded ? '' : ''} sidebar-button space-y-4 md:space-y-0`}>
-                        {/* Navigation Items */}
-                        <SidebarItem to="/dashboard" icon={<HomeIcon className="w-8 h-8 md:w-6 md:h-6" />} text="Dashboard" className="sidebar-button-item"/>
-                        <SidebarItem to="/moh-offices" icon={<BuildingOfficeIcon className="w-8 h-8 md:w-6 md:h-6" />} text="MOH Offices" />
-                        <SidebarItem to="/recent-activities" icon={<ChartBarIcon className="w-8 h-8 md:w-6 md:h-6" />} text="Recent Activities" />
-                        <SidebarItem to="/deployments" icon={<CloudIcon className="w-8 h-8 md:w-6 md:h-6" />} text="Deployments" />
-                        <SidebarItem to="/admins" icon={<UserCircleIcon className="w-8 h-8 md:w-6 md:h-6" />} text="Admins" />
-                        <SidebarItem to="/settings" icon={<CogIcon className="w-8 h-8 md:w-6 md:h-6" />} text="Settings" />
-                        <SidebarItem to="/logout" icon={<ArrowLeftOnRectangleIcon className="w-8 h-8 md:w-6 md:h-6" />} text="Logout" />
+                    <ul className={`flex-1 ${expanded ? '' : ''} sidebar-button space-y-4`}>
+                        <SidebarItem
+                            to="/dashboard"
+                            icon={<HomeIcon className="w-8 h-8" />}
+                            text="Dashboard"
+                            active={activeItem === '/dashboard'}
+                            onClick={handleItemClick}
+                        />
+                        <SidebarItem
+                            to="/moh-offices"
+                            icon={<BuildingOfficeIcon className="w-8 h-8" />}
+                            text="MOH Offices"
+                            active={activeItem === '/moh-offices'}
+                            onClick={handleItemClick}
+                        />
+                        <SidebarItem
+                            to="/recent-activities"
+                            icon={<ChartBarIcon className="w-8 h-8" />}
+                            text="Recent Activities"
+                            active={activeItem === '/recent-activities'}
+                            onClick={handleItemClick}
+                        />
+                        <SidebarItem
+                            to="/deployments"
+                            icon={<CloudIcon className="w-8 h-8" />}
+                            text="Deployments"
+                            active={activeItem === '/deployments'}
+                            onClick={handleItemClick}
+                        />
+                        <SidebarItem
+                            to="/admins"
+                            icon={<UserCircleIcon className="w-8 h-8" />}
+                            text="Admins"
+                            active={activeItem === '/admins'}
+                            onClick={handleItemClick}
+                        />
+                        <SidebarItem
+                            to="/settings"
+                            icon={<CogIcon className="w-8 h-8" />}
+                            text="Settings"
+                            active={activeItem === '/settings'}
+                            onClick={handleItemClick}
+                        />
+                        <SidebarItem
+                            to="/logout"
+                            icon={<ArrowLeftOnRectangleIcon className="w-8 h-8" />}
+                            text="Logout"
+                            active={activeItem === '/logout'}
+                            onClick={handleItemClick}
+                        />
                     </ul>
                 </SidebarContext.Provider>
-
-                {/* Sidebar Footer (User Info) */}
                 <div>
                     <Profile expanded={expanded} />
                 </div>
@@ -60,15 +105,15 @@ export default function Sidebar() {
     );
 }
 
-
-function SidebarItem({to, icon, text, active}) {
-    const {expanded} = useContext(SidebarContext);
+function SidebarItem({ to, icon, text, active, onClick }) {
+    const { expanded } = useContext(SidebarContext);
 
     return (
         <li
+            onClick={() => onClick(to)}
             className={`relative flex items-center py-3 px-5 my-2 font-medium rounded-md cursor-pointer transition-colors group ${
                 active
-                    ? 'bg-gradient-to-tr from-indigo-200 to-indigo-100 text-indigo-800'
+                    ? 'bg-black text-white'
                     : 'hover:bg-indigo-50 text-gray-600'
             }`}
         >
@@ -87,6 +132,7 @@ SidebarItem.propTypes = {
     icon: PropTypes.element.isRequired,
     text: PropTypes.string.isRequired,
     active: PropTypes.bool,
+    onClick: PropTypes.func.isRequired,
 };
 
 SidebarItem.defaultProps = {

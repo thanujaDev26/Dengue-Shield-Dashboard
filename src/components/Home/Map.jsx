@@ -38,7 +38,7 @@ export default function Map() {
                 </h2>
                 <div className="flex justify-between">
                     <div className="w-full lg:w-3/4 h-96 rounded-lg shadow-lg overflow-hidden">
-                        <LoadScript googleMapsApiKey="YOUR_GOOGLE_MAPS_API_KEY">
+                        <LoadScript googleMapsApiKey="AIzaSyDUqSCg2WqIFiNqCvL_rW7iH8_3GjTZUps">
                             <GoogleMap
                                 mapContainerStyle={containerStyle}
                                 center={defaultCenter}
