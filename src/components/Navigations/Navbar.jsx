@@ -41,7 +41,7 @@ export default function Sidebar() {
                 <SidebarContext.Provider value={{ expanded }}>
                     <ul className={`flex-1 ${expanded ? '' : ''} sidebar-button space-y-4`}>
                         {/* Navigation Items */}
-                        <SidebarItem to="/dashboard" icon={<HomeIcon className="w-8 h-8" />} text="Dashboard" className={({ isActive }) =>isActive ? "bg-blue-500 text-white font-bold" : "text-gray-600 hover:bg-gray-100"}/>
+                        <SidebarItem to="/dashboard" icon={<HomeIcon className="w-8 h-8" />} text="Dashboard" />
                         <SidebarItem to="/moh-offices" icon={<BuildingOfficeIcon className="w-8 h-8" />} text="MOH Offices" />
                         <SidebarItem to="/recent-activities" icon={<ChartBarIcon className="w-8 h-8" />} text="Recent Activities" />
                         <SidebarItem to="/deployments" icon={<CloudIcon className="w-8 h-8" />} text="Deployments" />
