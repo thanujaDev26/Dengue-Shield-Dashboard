@@ -27,8 +27,10 @@ export default function Sidebar() {
 
     return (
         <aside className="h-screen">
-            <nav className="h-full flex flex-col bg-white border-r shadow-sm px-4 py-3 sidebar">
-                <div className="flex items-center justify-between px-4 py-7">
+            <nav className="h-full flex flex-col bg-white border-r shadow-sm px-4 py-0 sidebar">
+                {/* Sidebar Header */}
+                <div className="flex items-center justify-between px-4 py-7 md:py-2">
+
                     {expanded && <h1 className="text-lg font-bold">Menu</h1>}
                     <button
                         onClick={() => setExpanded((current) => !current)}
