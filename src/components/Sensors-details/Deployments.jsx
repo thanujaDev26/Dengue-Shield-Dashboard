@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import SensorDetailsTable from '../../components/Sensors-details/SensorsDetailsTable';
-import MaintenanceTable from '../../components/Sensors-details/MaintenanceTable';
+import SensorDetailsTable from './SensorsDetailsTable.jsx';
+import MaintenanceTable from './MaintenanceTable.jsx';
 import MapPage from './Mappage';
 
 export default function Deployments () {
