@@ -50,49 +50,49 @@ export default function Sidebar() {
                             to="/dashboard"
                             icon={<HomeIcon className="w-5 h-5 sm:w-8 sm:h-8" />}
                             text="Dashboard"
-                            active={activeItem === '/dashboard'}
+                            //active={activeItem === '/dashboard'}
                             onClick={handleItemClick}
                         />
                         <SidebarItem
                             to="/moh-offices"
                             icon={<BuildingOfficeIcon className="w-5 h-5 sm:w-8 sm:h-8" />}
                             text="MOH Offices"
-                            active={activeItem === '/moh-offices'}
+                            //active={activeItem === '/moh-offices'}
                             onClick={handleItemClick}
                         />
                         <SidebarItem
                             to="/recent-activities"
                             icon={<ChartBarIcon className="w-5 h-5 sm:w-8 sm:h-8" />}
                             text="Recent Activities"
-                            active={activeItem === '/recent-activities'}
+                            //active={activeItem === '/recent-activities'}
                             onClick={handleItemClick}
                         />
                         <SidebarItem
                             to="/deployments"
                             icon={<CloudIcon className="w-5 h-5 sm:w-8 sm:h-8" />}
                             text="Deployments"
-                            active={activeItem === '/deployments'}
+                            //active={activeItem === '/deployments'}
                             onClick={handleItemClick}
                         />
                         <SidebarItem
                             to="/admins"
                             icon={<UserCircleIcon className="w-5 h-5 sm:w-8 sm:h-8" />}
                             text="Admins"
-                            active={activeItem === '/admins'}
+                            //active={activeItem === '/admins'}
                             onClick={handleItemClick}
                         />
                         <SidebarItem
                             to="/settings"
                             icon={<CogIcon className="w-5 h-5 sm:w-8 sm:h-8" />}
                             text="Settings"
-                            active={activeItem === '/settings'}
+                            //active={activeItem === '/settings'}
                             onClick={handleItemClick}
                         />
                         <SidebarItem
                             to="/logout"
                             icon={<ArrowLeftOnRectangleIcon className="w-5 h-5 sm:w-8 sm:h-8" />}
                             text="Logout"
-                            active={activeItem === '/logout'}
+                            //active={activeItem === '/logout'}
                             onClick={handleItemClick}
                         />
                     </ul>

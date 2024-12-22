@@ -1,12 +1,29 @@
+import React from 'react';
+import { useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 export default function Office() {
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    useEffect(() => {
+        const params = new URLSearchParams(location.search);
+        if (params.has('username') && !params.get('username')) {
+          navigate(-1);
+        }
+      }, [location, navigate]);
+
+    const goBack = () => {
+        navigate(-1);  // Navigates to the previous page
+    };
+
     return(
         <div className="Office">
             <div id="search_MOH">
                 <form>
                     <div className="w-full flex">
                         <div className="w-1/8 hidden md:block">
-                            <button type="submit" className="w-full rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 flex items-center justify-center">
+                            <button onClick={goBack} className="w-full rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 flex items-center justify-center">
                                 Go Back
                             </button>
                         </div>
