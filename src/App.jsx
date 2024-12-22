@@ -18,7 +18,7 @@ function App() {
         <BrowserRouter>
             <div className="flex h-screen">
                 <Sidebar/>
-                <div className="flex-1 bg-gray-100 overflow-y-auto p-6">
+                <div className="flex-1 bg-white overflow-y-auto p-6">
                     <Routes>
                         <Route path="/" element={<Home/>} />
                         <Route path="/dashboard" element={<Home/>} />
