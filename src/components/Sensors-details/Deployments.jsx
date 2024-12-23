@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import SensorDetailsTable from './SensorsDetailsTable.jsx';
 import MaintenanceTable from './MaintenanceTable.jsx';
 import MapPage from './Mappage';
 
 export default function Deployments () {
-    // Example sensor data with missing/broken values
     const sensors = [
       { id: 1, waterLevel: 20, flowSpeed: 1.2, temperature: 30, humidity: 85, district: "Colombo", latitude: 6.9271, longitude: 79.8612 },
       { id: 2, waterLevel: null, flowSpeed: 0.9, temperature: 28, humidity: 80, district: "Kandy", latitude: 7.2906, longitude: 80.6341 },
