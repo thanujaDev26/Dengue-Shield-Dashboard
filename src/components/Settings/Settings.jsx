@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Switch } from "@headlessui/react"; // Headless UI switch component for dark mode
 
-export default function SettingsPage() {
+export default function Settingspage() {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   const handleSave = () => {

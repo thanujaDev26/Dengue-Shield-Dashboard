@@ -31,32 +31,34 @@ export default function Map() {
     };
 
     return (
-      <div className="bg-white py-24 sm:py-32">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <h2 className="text-center text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl mb-16">
-            Sensor Deployment in Sri Lanka
-          </h2>
-          <div className="flex justify-between">
-            <div className="w-full lg:w-3/4 h-96 rounded-lg shadow-lg overflow-hidden">
-              <LoadScript googleMapsApiKey="AIzaSyDUqSCg2WqIFiNqCvL_rW7iH8_3GjTZUps">
-                <GoogleMap
-                  mapContainerStyle={containerStyle}
-                  center={defaultCenter}
-                  zoom={zoomLevel}
-                  options={{
-                    restriction: {
-                      latLngBounds: bounds,
-                      strictBounds: true,
-                    },
-                  }}
-                >
-                  {markers.map((marker, index) => (
-                    <Marker
-                      key={index}
-                      position={marker.position}
-                      onClick={() => setSelectedMarker(marker)}
-                    />
-                  ))}
+        <div className="bg-white py-24 sm:py-32">
+            <div className="mx-auto max-w-7xl px-6 lg:px-8">
+                <h2 className="text-center text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl mb-16">
+                    Sensor Deployment in Sri Lanka
+                </h2>
+                <div className="flex justify-between">
+                    <div className="w-full lg:w-3/4 h-96 rounded-lg shadow-lg overflow-hidden">
+                        <LoadScript googleMapsApiKey="AIzaSyDUqSCg2WqIFiNqCvL_rW7iH8_3GjTZUps">
+                            <GoogleMap
+                                mapContainerStyle={containerStyle}
+                                center={defaultCenter}
+                                zoom={zoomLevel}
+                                options={{
+                                    restriction: {
+                                        latLngBounds: bounds,
+                                        strictBounds: true, 
+                                    },
+                                }}
+                            >
+
+                                {markers.map((marker, index) => (
+                                    <Marker
+                                        key={index}
+                                        position={marker.position}
+                                        onClick={() => setSelectedMarker(marker)}
+                                    />
+                                ))}
+
 
                   {selectedMarker && (
                     <InfoWindow
