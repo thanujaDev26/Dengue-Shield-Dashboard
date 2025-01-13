@@ -1,21 +1,34 @@
-//
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import DeploymentsTable from './DeploymentsTable';
-import MaintenanceTable from './MaintenanceTable';
 import MaintenanceForm from './MaintenanceForm';
+import MaintenanceTable from './MaintenanceTable';
 
 export default function Deployments() {
   const [sensors, setSensors] = useState([
     { id: 1, waterLevel: 30, flowSpeed: 3.5, temperature: 22, humidity: 80, district: 'District 1' },
     { id: 2, waterLevel: null, flowSpeed: 4.1, temperature: 21, humidity: 75, district: 'District 2' },
-    { id: 3, waterLevel: 25, flowSpeed: 4.0, temperature: 20, humidity: 70, district: 'District 3' },
+    { id: 3, waterLevel: null, flowSpeed: 4.1, temperature: 21, humidity: 75, district: 'District 2' },
+    { id: 4, waterLevel: null, flowSpeed: 4.1, temperature: 21, humidity: 75, district: 'District 2' },
+    { id: 5, waterLevel: 25, flowSpeed: 4.0, temperature: 20, humidity: 70, district: 'District 3' },
+    { id: 6, waterLevel: null, flowSpeed: 4.1, temperature: 21, humidity: 75, district: 'District 2' },
   ]);
 
   const [maintenanceRecords, setMaintenanceRecords] = useState([]);
-  const [currentSensorId, setCurrentSensorId] = useState(null);
-  const [currentPage, setCurrentPage] = useState('deployments');
-  const [editableMaintenance, setEditableMaintenance] = useState(null); // Track the maintenance record to be edited
-  
+  const [maintenanceDataToUpdate, setMaintenanceDataToUpdate] = useState(null);
+  const [currentPage, setCurrentPage] = useState('deployments'); // Page management state
+
+  // Set maintenance records from sensors that have issues
+  useEffect(() => {
+    const issueSensors = sensors.filter(sensor => checkSensorStatus(sensor) === 'Issue');
+    setMaintenanceRecords(issueSensors.map(sensor => ({
+      sensorId: sensor.id,
+      issue: 'Default issue description',
+      action: 'Repair',
+      progress: 'Pending',
+    })));
+  }, [sensors]);
+
+  // Function to check sensor status
   const checkSensorStatus = (sensor) => {
     if (
       sensor.waterLevel == null ||
@@ -29,83 +42,68 @@ export default function Deployments() {
     ) {
       return 'Issue';
     }
-    return 'Normal';
+    
   };
 
-  const handleViewMaintenance = (sensorId) => {
-    setCurrentSensorId(sensorId);
-    setCurrentPage('maintenanceTable');
-  };
-
-  const handleAddMaintenance = (newMaintenance) => {
-    setMaintenanceRecords((prevRecords) => [...prevRecords, newMaintenance]);
-    setCurrentPage('maintenanceTable');
-  };
-
-  const handleUpdateMaintenance = (updatedMaintenance) => {
-    setMaintenanceRecords((prevRecords) =>
-      prevRecords.map((record) =>
-        record.sensorId === updatedMaintenance.sensorId ? updatedMaintenance : record
-      )
-    );
-    setEditableMaintenance(null);
-    setCurrentPage('maintenanceTable');
-  };
-
+  // Go back to deployments page and reset update data
   const handleGoBack = () => {
     setCurrentPage('deployments');
+    setMaintenanceDataToUpdate(null);
   };
 
-  const handleEditMaintenance = (maintenanceData) => {
-    setEditableMaintenance(maintenanceData);
-    setCurrentPage('maintenanceForm');
+  // Function to handle form submission for maintenance (both for adding and updating records)
+  const handleSubmitMaintenance = (maintenance) => {
+    if (maintenanceDataToUpdate) {
+      // Update existing maintenance record
+      setMaintenanceRecords(prevRecords =>
+        prevRecords.map(record =>
+          record.sensorId === maintenance.sensorId ? maintenance : record
+        )
+      );
+      setMaintenanceDataToUpdate(null);
+    } else {
+      // Add new maintenance record
+      setMaintenanceRecords(prevRecords => [...prevRecords, maintenance]);
+    }
+    setCurrentPage('maintenanceTable'); // Navigate to Maintenance Table
   };
 
-  // Add the handler for "Add Maintenance Issue" button
-  const handleAddMaintenanceIssue = (sensorId) => {
-    setCurrentSensorId(sensorId); // Set the sensorId for which we are adding the maintenance issue
-    setEditableMaintenance(null); // Reset editable maintenance data if any
-    setCurrentPage('maintenanceForm'); // Go to the maintenance form
+  // Function to show maintenance records table
+  const handleViewMaintenanceRecords = () => {
+    setCurrentPage('maintenanceTable');
   };
 
   return (
     <div className="deployment-app">
-      <h1 className="text-3xl font-semibold mb-6">Sensor Monitoring</h1>
-      <div className="flex justify-between mb-4">
-        <button
-          onClick={() => setCurrentPage('deployments')}
-          className="bg-blue-500 text-white py-2 px-4 rounded"
-        >
-          Home
-        </button>
-      </div>
+      
 
+      {/* Show Deployments table */}
       {currentPage === 'deployments' && (
         <DeploymentsTable
           sensors={sensors}
           checkSensorStatus={checkSensorStatus}
-          handleViewMaintenance={handleViewMaintenance}
-          maintenanceRecords={maintenanceRecords} // Pass maintenance records to the table
-          handleAddMaintenanceIssue={handleAddMaintenanceIssue} // Pass handler to handle "Add Maintenance Issue"
+          handleViewMaintenanceRecords={handleViewMaintenanceRecords}
         />
       )}
 
+      {/* Show Maintenance Table */}
       {currentPage === 'maintenanceTable' && (
         <MaintenanceTable
-          maintenanceData={maintenanceRecords.filter(
-            (record) => record.sensorId === currentSensorId
-          )}
-          handleEditMaintenance={handleEditMaintenance}
+          maintenanceData={maintenanceRecords}
           handleGoBack={handleGoBack}
+          handleUpdateMaintenance={(maintenance) => {
+            setMaintenanceDataToUpdate(maintenance);
+            setCurrentPage('maintenanceForm');
+          }}
         />
       )}
 
+      {/* Show Maintenance Form */}
       {currentPage === 'maintenanceForm' && (
         <MaintenanceForm
-          sensorId={currentSensorId}
-          editableMaintenance={editableMaintenance}
-          handleAddMaintenance={handleAddMaintenance}
-          handleUpdateMaintenance={handleUpdateMaintenance}
+          sensorId={maintenanceDataToUpdate?.sensorId}
+          handleUpdateMaintenance={handleSubmitMaintenance} // This will handle form submission
+          maintenanceDataToUpdate={maintenanceDataToUpdate}
           handleGoBack={handleGoBack}
         />
       )}
