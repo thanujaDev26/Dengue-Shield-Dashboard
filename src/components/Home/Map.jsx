@@ -60,27 +60,28 @@ export default function Map() {
                                 ))}
 
 
-                                {selectedMarker && (
-                                    <InfoWindow
-                                        position={selectedMarker.position}
-                                        onCloseClick={() => setSelectedMarker(null)}
-                                    >
-                                        <div>
-                                            <h4 className="text-lg font-bold text-gray-900">{selectedMarker.name}</h4>
-                                            <p className="text-gray-600">Sensor location</p>
-                                        </div>
-                                    </InfoWindow>
-                                )}
-                            </GoogleMap>
-                        </LoadScript>
-                    </div>
-
-
-                    <div className="w-full lg:w-1/2 pl-8">
-                        <Weather />
-                    </div>
-                </div>
+                  {selectedMarker && (
+                    <InfoWindow
+                      position={selectedMarker.position}
+                      onCloseClick={() => setSelectedMarker(null)}
+                    >
+                      <div>
+                        <h4 className="text-lg font-bold text-gray-900">
+                          {selectedMarker.name}
+                        </h4>
+                        <p className="text-gray-600">Sensor location</p>
+                      </div>
+                    </InfoWindow>
+                  )}
+                </GoogleMap>
+              </LoadScript>
             </div>
+
+            <div className="w-full lg:w-1/2 pl-8">
+              <Weather />
+            </div>
+          </div>
         </div>
+      </div>
     );
 }
