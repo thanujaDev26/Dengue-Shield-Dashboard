@@ -23,7 +23,7 @@ const Login = () => {
                             <input type="password" className='border-b-2 border-black focus:outline-none w-full'></input>
                         </div>
                         <div className='mb-10 flex justify-center items-center'>
-                            <button type="submit" href={handleLogin} className='w-1/2 p-2 rounded-full bg-gray-600'>Login</button>
+                            <button type="submit" onClick={handleLogin} className='w-1/2 p-2 rounded-full bg-gray-600'>Login</button>
                         </div>
                     </div> 
                 </form>               
