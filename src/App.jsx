@@ -9,6 +9,7 @@ import Admins from './components/Admin-users/Admins.jsx';
 import Logout from './components/Logout/Logout.jsx';
 import Sidebar from './components/Navigations/Navbar.jsx';
 import Login from './components/Login/Login.jsx';
+import Signup from './components/Sign-up/Signup.jsx';
 import ProtectedRoute from './components/Authentications/ProtectedRoute.jsx';
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
         <Routes>
             {/* Public Route */}
             <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
 
             {/* Protected Routes */}
             <Route
