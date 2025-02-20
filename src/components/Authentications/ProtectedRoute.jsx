@@ -6,12 +6,11 @@ const ProtectedRoute = ({ children }) => {
     const { user } = useAuth();
 
     if (!user) {
-        return <Navigate to="/login" replace />;
+        return <Navigate to="/" replace />;
     }
 
     return children;
 };
-
 
 ProtectedRoute.propTypes = {
     children: PropTypes.node.isRequired,

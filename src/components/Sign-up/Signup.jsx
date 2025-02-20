@@ -80,7 +80,7 @@ export default function Signup() {
         {/* Already Have an Account */}
         <p className="mt-6 text-center text-sm text-gray-600">
           Already have an account? 
-          <a href="/login" className="text-blue-500 hover:underline">Login</a>
+          <a href="/" className="text-blue-500 hover:underline">Login</a>
         </p>
       </div>
     </div>
