@@ -15,7 +15,7 @@ const Login = () => {
         e.preventDefault();
         setError("");
         try {
-            const response = await axios.post("http://localhost:3001/api/v1/sign-in", {
+            const response = await axios.post("http://18.142.56.101:3001/api/v1/sign-in", {
                 email,
                 password,
             });
