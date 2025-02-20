@@ -20,10 +20,13 @@ const SidebarContext = createContext();
 export default function Sidebar() {
     const [expanded, setExpanded] = useState(false);
     const [activeItem, setActiveItem] = useState('/dashboard');
+    
 
     const handleItemClick = (path) => {
         setActiveItem(path);
     };
+
+
 
     return (
         <aside className="h-screen">
@@ -89,7 +92,7 @@ export default function Sidebar() {
                             onClick={handleItemClick}
                         />
                         <SidebarItem
-                            to="/logout"
+                            to="/"
                             icon={<ArrowLeftOnRectangleIcon className="w-5 h-5 sm:w-8 sm:h-8" />}
                             text="Logout"
                             //active={activeItem === '/logout'}
